@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Meza Archive 👑 | Magic Oracle</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Imbue:opsz,wght@10..100,400;10..100,700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg"></div>
+    <div class="lightning"></div>
+    <div class="dark-overlay"></div>
+    <div class="fog"></div>
+    <div class="rain"></div>
+
+    <div class="card">
+        <h1>Meza Archive 👑</h1>
+        <p class="bio">Dark Fantasy & Aesthetic</p>
+
+        <div id="clock"></div>
+        
+        <div class="oracle-box">
+            <p id="oracle-text">"Tap the crystal to see your fate..."</p>
+            <button class="oracle-btn" onclick="askOracle()">🔮 Ask the Oracle</button>
+        </div>
+
+        <div class="links">
+            <a href="https://wa.me/62895320911586" class="button">WhatsApp</a>
+            <a href="https://www.instagram.com/ezagatauu?igsh=dnB1OHU3MnUydndv" class="button">Instagram</a>
+        </div>
+
+        <div class="controls">
+            <button class="play-btn" onclick="playMusic()">▶ Play</button>
+            <button class="stop-btn" onclick="stopMusic()">⏸ Stop</button>
+        </div>
+    </div>
+
+    <audio id="musik" loop>
+        <source src="goldenbrown.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const clockElement = document.getElementById("clock");
+        const audio = document.getElementById("musik");
+        const oracleText = document.getElementById("oracle-text");
+
+        function playMusic() { audio.play(); }
+        function stopMusic() { audio.pause(); }
+
+        // Logic Jam Berubah Warna
+        const magicColors = ["#ffffff", "#ffd700", "#c8a96a", "#87ceeb", "#e0e0e0", "#f5e6c8"];
+        function updateClock() {
+            const now = new Date();
+            const tgl = now.toLocaleDateString("id-ID", { weekday: 'short', day: 'numeric', month: 'short' });
+            const jam = now.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            clockElement.innerHTML = `${tgl} | <strong>${jam}</strong>`;
+            
+            const randomColor = magicColors[Math.floor(Math.random() * magicColors.length)];
+            clockElement.style.color = randomColor;
+            clockElement.style.textShadow = `0 0 10px ${randomColor}80`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // LOGIC GAME RAMALAN
+        function askOracle() {
+            const fates = [
+                "A great treasure awaits you in the shadows.",
+                "Beware of the wolf in sheep's clothing.",
+                "Tonight, the stars align in your favor.",
+                "Someone is thinking about you right now.",
+                "Your path is dark, but your soul is bright.",
+                "The king will return at dawn.",
+                "Expect a message from an old friend.",
+                "Patience is your greatest weapon today."
+            ];
+            
+            oracleText.style.opacity = 0; // Efek pudar keluar
+            setTimeout(() => {
+                oracleText.innerText = fates[Math.floor(Math.random() * fates.length)];
+                oracleText.style.opacity = 1; // Efek pudar masuk
+                oracleText.style.color = "#ffd700";
+            }, 400);
+        }
+    </script>
+</body>
+</html>
